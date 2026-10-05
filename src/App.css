@@ -1,0 +1,119 @@
+.app-container {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  width: 100%;
+}
+
+.header {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.greeting {
+  font-size: clamp(1.25rem, 5vw, 1.5rem);
+  font-weight: 600;
+  color: #38bdf8;
+  margin-bottom: 0.25rem;
+  letter-spacing: 0.05em;
+}
+
+.clock-container {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  width: 100%;
+}
+
+.clock {
+  font-size: clamp(2.5rem, 12vw, 5rem);
+  font-weight: 700;
+  letter-spacing: -2px;
+  background: linear-gradient(to right, #60a5fa, #c084fc, #f472b6);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-variant-numeric: tabular-nums;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.date-info {
+  font-size: clamp(1rem, 4vw, 1.25rem);
+  color: #94a3b8;
+  font-weight: 500;
+  text-transform: capitalize;
+}
+
+.quote-section {
+  text-align: center;
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 1rem;
+  padding: 1.5rem;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.quote-title {
+  font-size: 0.875rem;
+  color: #94a3b8;
+  letter-spacing: 0.1em;
+  margin-bottom: 0.75rem;
+}
+
+.quote-content {
+  font-size: clamp(1rem, 4vw, 1.25rem);
+  font-weight: 500;
+  color: #e2e8f0;
+  font-style: italic;
+  line-height: 1.5;
+  word-wrap: break-word;
+}
+
+/* Mobile-first Layout */
+.dashboard-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  width: 100%;
+}
+
+.time-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  width: 100%;
+}
+
+.side-panel {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.fade-in {
+  animation: fadeIn 1s ease-in;
+}
+
+@keyframes fadeIn {
+  0% { opacity: 0; transform: translateY(10px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+@media (min-width: 1024px) {
+  .dashboard-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+  }
+  
+  .time-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  }
+}

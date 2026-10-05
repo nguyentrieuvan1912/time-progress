@@ -1,0 +1,61 @@
+export const DAILY_QUOTES = [
+  "Hôm nay là một ngày tốt để bắt đầu.",
+  "Đừng cố đi nhanh hơn người khác. Hãy chắc chắn rằng mình đang đi đúng hướng.",
+  "Thời gian không chờ kế hoạch hoàn hảo.",
+  "Một bước nhỏ hôm nay vẫn tốt hơn một kế hoạch lớn chưa bao giờ bắt đầu.",
+  "Kỷ luật là cầu nối giữa mục tiêu và thành tựu.",
+  "Mỗi buổi sáng mang đến một cơ hội mới để vươn lên.",
+  "Làm những gì bạn có thể, với những gì bạn có, ở nơi bạn đang đứng.",
+  "Thành công không đến từ những gì bạn làm thỉnh thoảng, mà từ những gì bạn làm liên tục.",
+  "Hãy là phiên bản tốt hơn của chính bạn so với ngày hôm qua.",
+  "Hãy trân trọng thời gian, vì đó là tài sản duy nhất không thể mua lại.",
+  "Mồ hôi của ngày hôm nay là nụ cười của ngày mai.",
+  "Đừng đếm những ngày đã qua, hãy làm cho những ngày đang tới có ý nghĩa.",
+  "Hành trình vạn dặm bắt đầu từ một bước chân.",
+  "Khó khăn không phải là để cản bước, mà là để rèn luyện.",
+  "Tương lai phụ thuộc vào những gì bạn làm hôm nay.",
+  "Không có giới hạn nào ngoài những gì bạn tự đặt ra cho mình.",
+  "Kiên trì là chìa khóa mở ra mọi cánh cửa.",
+  "Thái độ quyết định độ cao của bạn.",
+  "Chỉ khi bạn bắt đầu, bạn mới biết mình có thể đi được bao xa.",
+  "Cơ hội thường nguỵ trang dưới lớp vỏ của khó khăn.",
+  "Sự chuẩn bị tốt nhất cho ngày mai là làm tốt nhất ngày hôm nay.",
+  "Những điều tốt đẹp nhất thường đến với những ai biết chờ đợi và nỗ lực.",
+  "Không bao giờ là quá muộn để đặt ra một mục tiêu mới hoặc mơ một giấc mơ mới.",
+  "Hãy hành động ngay bây giờ, vì thời điểm hoàn hảo không bao giờ tồn tại.",
+  "Đừng để nỗi sợ hãi ngăn cản bạn vươn tới thành công.",
+  "Hãy tin vào chính mình, bạn mạnh mẽ hơn bạn nghĩ.",
+  "Mỗi thất bại là một bài học giúp bạn đến gần hơn với thành công.",
+  "Thành công là một cuộc hành trình, không phải là một điểm đến.",
+  "Hãy tập trung vào quá trình, kết quả sẽ tự đến.",
+  "Sự tiến bộ mỗi ngày, dù nhỏ, cũng sẽ mang lại kết quả to lớn.",
+  "Hãy luôn giữ tâm trí cởi mở và trái tim rộng lượng.",
+  "Đừng so sánh mình với người khác, hãy so sánh với chính mình ngày hôm qua.",
+  "Thành tựu lớn nhất là đánh bại những thói quen xấu của bản thân.",
+  "Hãy làm việc âm thầm, để thành công của bạn tự lên tiếng.",
+  "Sự tập trung là nguồn sức mạnh vô tận.",
+  "Người không ngừng học hỏi là người không bao giờ già.",
+  "Tự do đích thực bắt nguồn từ kỷ luật tự giác.",
+  "Năng lượng tích cực thu hút những điều tốt đẹp.",
+  "Không có con đường tắt nào dẫn đến bất kỳ nơi nào đáng giá.",
+  "Sự nỗ lực của bạn hôm nay sẽ được đền đáp vào ngày mai.",
+  "Hãy sống hết mình cho giây phút hiện tại.",
+  "Khát khao học hỏi là khởi nguồn của mọi sự tiến bộ.",
+  "Đừng ngại thay đổi, đó là cách bạn trưởng thành.",
+  "Mỗi khó khăn đều ẩn chứa một cơ hội trưởng thành.",
+  "Hãy tạo ra cơ hội thay vì chờ đợi chúng.",
+  "Sự tử tế là ngôn ngữ mà người điếc có thể nghe và người mù có thể thấy.",
+  "Đam mê là nguồn nhiên liệu thúc đẩy sự vĩ đại.",
+  "Sự cam kết là điều biến lời hứa thành hiện thực.",
+  "Hạnh phúc không phải là có những gì bạn muốn, mà là trân trọng những gì bạn đang có.",
+  "Lạc quan là niềm tin dẫn tới thành tựu.",
+  "Bạn là người tự quyết định giá trị của bản thân mình."
+];
+
+export function getDailyQuote(now: Date): string {
+  const startOfYear = new Date(now.getFullYear(), 0, 0);
+  const diff = now.getTime() - startOfYear.getTime();
+  const oneDay = 1000 * 60 * 60 * 24;
+  const dayOfYear = Math.floor(diff / oneDay);
+  return DAILY_QUOTES[dayOfYear % DAILY_QUOTES.length];
+}
