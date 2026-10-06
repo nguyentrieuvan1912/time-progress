@@ -14,6 +14,7 @@ import {
 
 function App() {
   const [now, setNow] = useState(new Date());
+  const [isMiniMode, setIsMiniMode] = useState(false);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -54,70 +55,78 @@ function App() {
   const dailyQuote = getDailyQuote(now);
 
   return (
-    <div className="app-container">
+    <div className={`app-container ${isMiniMode ? 'mini-mode' : ''}`}>
       <header className="header">
-        <div className="greeting fade-in">{getGreeting(now)}</div>
+        {!isMiniMode && <div className="greeting fade-in">{getGreeting(now)}</div>}
         <div className="clock-container">
           <div className="clock">{formatTime(now)}</div>
         </div>
-        <div className="date-info">{formatDate(now)}</div>
+        <div className="date-info">
+          {!isMiniMode && formatDate(now)}
+          <button 
+            className="mode-toggle"
+            onClick={() => setIsMiniMode(!isMiniMode)}
+            title="Toggle Mini Mode"
+          >
+            {isMiniMode ? '⤢ Normal' : '⤡ Mini'}
+          </button>
+        </div>
       </header>
 
-      <section className="quote-section fade-in">
-        <h4 className="quote-title">💭 THÔNG ĐIỆP HÔM NAY</h4>
-        <p className="quote-content">"{dailyQuote}"</p>
-      </section>
+      {!isMiniMode && (
+        <section className="quote-section fade-in">
+          <h4 className="quote-title">💭 THÔNG ĐIỆP HÔM NAY</h4>
+          <p className="quote-content">"{dailyQuote}"</p>
+        </section>
+      )}
 
       <main className="dashboard-grid">
         <div className="time-cards">
         <TimeProgressCard
-          title="Thời gian làm việc"
+          title="WORK"
           percentage={workday.percentage}
-          startTime={workday.startTimeLabel}
-          endTime={workday.endTimeLabel}
           colorStart="#10b981"
           colorEnd="#34d399"
+          compact={isMiniMode}
         />
         
         <TimeProgressCard
-          title="Một ngày"
+          title="DAY"
           percentage={day.percentage}
-          startTime={day.startTimeLabel}
-          endTime={day.endTimeLabel}
           colorStart="#3b82f6"
           colorEnd="#60a5fa"
+          compact={isMiniMode}
         />
         
         <TimeProgressCard
-          title="Một tuần"
+          title="WEEK"
           percentage={week.percentage}
-          startTime={week.startTimeLabel}
-          endTime={week.endTimeLabel}
           colorStart="#8b5cf6"
           colorEnd="#c084fc"
+          compact={isMiniMode}
         />
         
         <TimeProgressCard
-          title="Một tháng"
+          title="MONTH"
           percentage={month.percentage}
-          startTime={month.startTimeLabel}
-          endTime={month.endTimeLabel}
           colorStart="#ec4899"
           colorEnd="#f472b6"
+          compact={isMiniMode}
         />
         
         <TimeProgressCard
-          title="Một năm"
+          title="YEAR"
           percentage={year.percentage}
-          startTime={year.startTimeLabel}
-          endTime={year.endTimeLabel}
           colorStart="#f59e0b"
           colorEnd="#fbbf24"
+          compact={isMiniMode}
         />
         </div>
-        <div className="side-panel">
-          <MilestoneList milestones={upcomingMilestones} />
-        </div>
+        {!isMiniMode && (
+          <div className="side-panel">
+            <MilestoneList milestones={upcomingMilestones} />
+          </div>
+        )}
       </main>
     </div>
   );

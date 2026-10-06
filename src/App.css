@@ -3,6 +3,11 @@
   flex-direction: column;
   gap: 2rem;
   width: 100%;
+  transition: all 0.3s ease;
+}
+
+.app-container.mini-mode {
+  gap: 1rem;
 }
 
 .header {
@@ -40,11 +45,44 @@
   white-space: nowrap;
 }
 
+.mini-mode .clock {
+  font-size: 2rem;
+  letter-spacing: -1px;
+}
+
 .date-info {
   font-size: clamp(1rem, 4vw, 1.25rem);
   color: #94a3b8;
   font-weight: 500;
   text-transform: capitalize;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.mode-toggle {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #e2e8f0;
+  padding: 0.25rem 0.75rem;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  min-width: 44px;
+  min-height: 44px; /* Touch friendly */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.mini-mode .mode-toggle {
+  min-height: 32px;
+}
+
+.mode-toggle:hover {
+  background: rgba(255, 255, 255, 0.2);
 }
 
 .quote-section {
@@ -76,7 +114,6 @@
   word-wrap: break-word;
 }
 
-/* Mobile-first Layout */
 .dashboard-grid {
   display: flex;
   flex-direction: column;
@@ -84,11 +121,19 @@
   width: 100%;
 }
 
+.mini-mode .dashboard-grid {
+  gap: 0.5rem;
+}
+
 .time-cards {
   display: flex;
   flex-direction: column;
   gap: 1.25rem;
   width: 100%;
+}
+
+.mini-mode .time-cards {
+  gap: 0.5rem;
 }
 
 .side-panel {
@@ -107,13 +152,15 @@
 }
 
 @media (min-width: 1024px) {
-  .dashboard-grid {
+  .dashboard-grid:not(.mini-mode .dashboard-grid) {
     display: grid;
     grid-template-columns: 2fr 1fr;
+    align-items: start;
   }
   
-  .time-cards {
+  .time-cards:not(.mini-mode .time-cards) {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    align-content: start;
   }
 }

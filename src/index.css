@@ -28,6 +28,11 @@ body {
     radial-gradient(circle at 85% 30%, rgba(139, 92, 246, 0.15), transparent 30%);
   background-attachment: fixed;
   overflow-x: hidden;
+  transition: padding 0.3s ease;
+}
+
+body:has(.mini-mode) {
+  padding: calc(1rem + env(safe-area-inset-top)) max(0.75rem, env(safe-area-inset-right)) calc(1rem + env(safe-area-inset-bottom)) max(0.75rem, env(safe-area-inset-left));
 }
 
 #root {
