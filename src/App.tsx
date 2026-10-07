@@ -12,7 +12,7 @@ import {
   getYearProgress,
   getLifeProgress
 } from './utils/timeProgress';
-
+//hello
 function App() {
   const [now, setNow] = useState(new Date());
   const [isMiniMode, setIsMiniMode] = useState(false);
