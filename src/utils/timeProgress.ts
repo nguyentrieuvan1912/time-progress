@@ -123,3 +123,27 @@ export function getYearProgress(now: Date): TimeProgressInfo {
     endTimeLabel: `01/01/${now.getFullYear() + 1}`
   };
 }
+
+const LIFE_TARGET_AGE = 60;
+
+export function getLifeProgress(now: Date): TimeProgressInfo {
+  const birthDate = new Date(2004, 11, 19, 0, 0, 0, 0); // 19/12/2004
+  const targetDate = new Date(
+    birthDate.getFullYear() + LIFE_TARGET_AGE,
+    birthDate.getMonth(),
+    birthDate.getDate(),
+    0, 0, 0, 0
+  );
+  
+  const tNow = now.getTime();
+  const tStart = birthDate.getTime();
+  const tEnd = targetDate.getTime();
+  
+  const percentage = ((tNow - tStart) / (tEnd - tStart)) * 100;
+
+  return {
+    percentage: Math.max(0, Math.min(100, percentage)),
+    startTimeLabel: '19/12/2004',
+    endTimeLabel: `19/12/${2004 + LIFE_TARGET_AGE}`
+  };
+}

@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef, useMemo } from 'react';
 import './App.css';
 import { TimeProgressCard } from './components/TimeProgressCard';
 import { MilestoneList } from './components/MilestoneCard';
@@ -9,12 +9,15 @@ import {
   getDayProgress,
   getWeekProgress,
   getMonthProgress,
-  getYearProgress
+  getYearProgress,
+  getLifeProgress
 } from './utils/timeProgress';
 
 function App() {
   const [now, setNow] = useState(new Date());
   const [isMiniMode, setIsMiniMode] = useState(false);
+  const [showCelebration, setShowCelebration] = useState(false);
+  const prevWorkProgress = useRef<number | null>(null);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -50,12 +53,52 @@ function App() {
   const week = getWeekProgress(now);
   const month = getMonthProgress(now);
   const year = getYearProgress(now);
+  const life = getLifeProgress(now);
 
   const upcomingMilestones = getNextMilestones(now);
   const dailyQuote = getDailyQuote(now);
 
+  useEffect(() => {
+    if (prevWorkProgress.current !== null) {
+      if (prevWorkProgress.current < 100 && workday.percentage === 100) {
+        setShowCelebration(true);
+        setTimeout(() => setShowCelebration(false), 4000);
+      }
+    }
+    prevWorkProgress.current = workday.percentage;
+  }, [workday.percentage]);
+
+  const celebrationParticles = useMemo(() => {
+    if (!showCelebration) return null;
+    return Array.from({ length: 50 }).map((_, i) => {
+      const angle = Math.random() * Math.PI * 2;
+      const distance = 50 + Math.random() * 250;
+      const tx = `${Math.cos(angle) * distance}px`;
+      const ty = `${Math.sin(angle) * distance}px`;
+      const colors = ['#f472b6', '#60a5fa', '#34d399', '#fbbf24', '#c084fc', '#e11d48'];
+      const color = colors[Math.floor(Math.random() * colors.length)];
+      return (
+        <div 
+          key={i} 
+          className="burst-particle"
+          style={{
+            '--tx': tx,
+            '--ty': ty,
+            backgroundColor: color,
+            animationDelay: `${Math.random() * 0.2}s`
+          } as React.CSSProperties}
+        />
+      );
+    });
+  }, [showCelebration]);
+
   return (
     <div className={`app-container ${isMiniMode ? 'mini-mode' : ''}`}>
+      {showCelebration && (
+        <div className="celebration-overlay">
+          {celebrationParticles}
+        </div>
+      )}
       <header className="header">
         {!isMiniMode && <div className="greeting fade-in">{getGreeting(now)}</div>}
         <div className="clock-container">
@@ -119,6 +162,14 @@ function App() {
           percentage={year.percentage}
           colorStart="#f59e0b"
           colorEnd="#fbbf24"
+          compact={isMiniMode}
+        />
+        
+        <TimeProgressCard
+          title="LIFE"
+          percentage={life.percentage}
+          colorStart="#e11d48"
+          colorEnd="#fb7185"
           compact={isMiniMode}
         />
         </div>

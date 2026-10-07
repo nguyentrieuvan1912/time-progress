@@ -162,5 +162,37 @@
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     align-content: start;
+}
+
+.celebration-overlay {
+  position: fixed;
+  top: 0; left: 0; width: 100vw; height: 100vh;
+  pointer-events: none;
+  z-index: 9999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.burst-particle {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  animation: burst 2.5s cubic-bezier(0.1, 0.8, 0.3, 1) forwards;
+  opacity: 0;
+}
+
+@keyframes burst {
+  0% { transform: translate(0, 0) scale(0); opacity: 1; }
+  20% { opacity: 1; }
+  100% { transform: translate(var(--tx), var(--ty)) scale(1.5); opacity: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .burst-particle {
+    animation: none;
+    display: none;
   }
 }
