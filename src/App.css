@@ -152,16 +152,27 @@
 }
 
 @media (min-width: 1024px) {
-  .dashboard-grid:not(.mini-mode .dashboard-grid) {
+  .dashboard-grid {
     display: grid;
     grid-template-columns: 2fr 1fr;
     align-items: start;
   }
-  
-  .time-cards:not(.mini-mode .time-cards) {
+
+  .mini-mode .dashboard-grid {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .time-cards {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     align-content: start;
+  }
+
+  .mini-mode .time-cards {
+    display: flex;
+    flex-direction: column;
+  }
 }
 
 .celebration-overlay {
