@@ -30,14 +30,19 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 0.5rem;
+  min-width: 0;
 }
 
 .card-title {
-  font-size: 1.125rem;
-  font-weight: 600;
+  font-size: 1rem;
+  font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.08em;
   color: #e2e8f0;
+  white-space: nowrap;
+  min-width: 0;
+  flex-shrink: 0;
 }
 
 .card.compact .card-title {
@@ -47,15 +52,18 @@
 .card-right {
   display: flex;
   align-items: center;
-  gap: 0.75rem;
+  gap: 0.5rem;
+  min-width: 0;
+  flex-shrink: 0;
 }
 
 .card-percentage {
-  font-size: 1.75rem;
+  font-size: clamp(1.1rem, 4vw, 1.75rem);
   font-weight: 700;
   color: #fff;
   font-variant-numeric: tabular-nums;
   letter-spacing: -0.5px;
+  white-space: nowrap;
 }
 
 .card.compact .card-percentage {
@@ -77,6 +85,7 @@
 
 .progress-container {
   width: 100%;
+  min-width: 0;
   padding: 0.25rem 0;
 }
 
